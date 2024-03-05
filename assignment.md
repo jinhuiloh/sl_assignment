@@ -2,7 +2,6 @@
 
 Data warehouse layer
 - A denormalized table with columns from multiple tables joined into a single table so that data can be queried faster, reducing the need for similar repeated join queries
-```
 Sample sql:
     select
         a.id as order_id
@@ -25,7 +24,6 @@ Sample sql:
     on a.id=d.order_id
 In this sql, I am only including the id of the products/variants because of storage consideration.
 Name columns can be included in the table if there is a need to or we can just join the relevant tables in downstream pipeline.
-```
 
 Data mart layer
 - Can create multiple aggregated tables from the denormalized table, aggregated with the dimension/s needed
@@ -58,13 +56,23 @@ Assuming that we are extracting to S3 and loading to Redshift as data warehouse
 # Data Pipelining
 
 ## Pipelining
-Image attached in another file
+
+Assuming Redshift as data warehouse and tableau as dashboard
+
+1) Put the incremental files in S3 in different paths for each day (ie.S3://{bucket}/{table_name}/{date}), do regular cleanups on the s3 files(put in cold storage or just delete)
+2) Using airflow as the scheduler, schedule airflow jobs for the following tasks, can be split into multiple dags depending on the complexity of the pipeline
+- extract data from source db
+- do a load in target data warehouse
+- perform etl
+- call tableau api to trigger data refresh for dashboard
+3) If the data is uploaded automatically, check for files in the S3 path.(send a warning email or even fail the airflow task if file does not exist in the path)
 
 ## Cloud Engineering
-Image attached in another file
+
+Attached image Fig.1
 
 # Analytical SQL
-```
+
 select
     date
     ,product_id
@@ -81,7 +89,7 @@ from(
         ,max(date) over (partition by product_id) max_date
     from sales
 )a
-```
+
 
 ### Problem 2 - SQL Optimization
 
