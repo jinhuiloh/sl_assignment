@@ -69,7 +69,7 @@ Assuming Redshift as data warehouse and tableau as dashboard
 
 ## Cloud Engineering
 
-Attached image Fig.1
+Attached image Figure 1
 
 # Analytical SQL
 
