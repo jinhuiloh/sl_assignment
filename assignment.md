@@ -2,6 +2,7 @@
 
 Data warehouse layer
 - A denormalized table with columns from multiple tables joined into a single table so that data can be queried faster, reducing the need for similar repeated join queries
+```
 Sample sql:
     select
         a.id as order_id
@@ -24,6 +25,7 @@ Sample sql:
     on a.id=d.order_id
 In this sql, I am only including the id of the products/variants because of storage consideration.
 Name columns can be included in the table if there is a need to or we can just join the relevant tables in downstream pipeline.
+```
 
 Data mart layer
 - Can create multiple aggregated tables from the denormalized table, aggregated with the dimension/s needed
