@@ -62,7 +62,7 @@ Image attached in another file
 Image attached in another file
 
 # Analytical SQL
-
+```
 select
     date
     ,product_id
@@ -79,7 +79,7 @@ from(
         ,max(date) over (partition by product_id) max_date
     from sales
 )a
-
+```
 
 ### Problem 2 - SQL Optimization
 
