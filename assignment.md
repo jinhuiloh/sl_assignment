@@ -97,5 +97,5 @@ from(
 
 Looking at the query, the main issue is the data exploding because of using the full working_days table.
 Considering the fact that the sla should not be too long, we should not be using the full working_days table.
-Instead we should restrict the date in working_days table(ie. <30 days from now,depending on the sla)
+We should restrict the date in working_days table(ie. <30 days from now,depending on the sla).
 We can also filter on the order_line table to only include the range of the duration we are planning to analyse
